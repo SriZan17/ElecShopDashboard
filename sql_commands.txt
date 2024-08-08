@@ -1,0 +1,46 @@
+mysql -u root
+
+CREATE DATABASE elec_shop;
+
+USE elec_shop;
+
+CREATE DATABASE shop_management;
+
+USE shop_management;
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    role ENUM('manager', 'employee') NOT NULL
+);
+
+CREATE TABLE products (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    image VARCHAR(255) NOT NULL,
+    quantity INT NOT NULL
+);
+
+CREATE TABLE inventory (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    product_id INT NOT NULL,
+    quantity INT NOT NULL,
+    FOREIGN KEY (product_id) REFERENCES products(id)
+);
+
+CREATE TABLE transactions (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    product_id INT NOT NULL,
+    transaction_type ENUM('purchase', 'sale') NOT NULL,
+    quantity INT NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    transaction_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (product_id) REFERENCES products(id)
+);
+
+#password = letthiswork
+INSERT INTO users (username, password, role) VALUES ('admin', '$2y$10$FGK.6PzJ9wFJpLlVKNmcMuqOqgtCBaBb.Df6sTNdJfRsfzkX8HRum', 'manager');
+INSERT INTO users (username, password, role) VALUES ('employee1', '$2y$10$FGK.6PzJ9wFJpLlVKNmcMuqOqgtCBaBb.Df6sTNdJfRsfzkX8HRum', 'employee');
+INSERT INTO users (username, password, role) VALUES ('employee2', '$2y$10$FGK.6PzJ9wFJpLlVKNmcMuqOqgtCBaBb.Df6sTNdJfRsfzkX8HRum', 'employee');
