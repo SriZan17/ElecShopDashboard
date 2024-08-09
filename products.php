@@ -74,3 +74,4 @@ $products = $pdo->query("SELECT * FROM products")->fetchAll();
 </body>
 
 </html>
+<?php include('includes/footer.php'); ?>

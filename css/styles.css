@@ -1,0 +1,267 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body and Main Wrapper */
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex: 1;
+}
+
+/* Header and Navigation */
+header {
+  background-color: #4caf50;
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 32px;
+  letter-spacing: 1.5px;
+  font-weight: 700;
+}
+
+nav {
+  margin-top: 10px;
+}
+
+nav a {
+  color: white;
+  margin: 0 20px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  font-size: 18px;
+}
+
+nav a:hover {
+  color: #ffeb3b;
+}
+
+/* Form Styles */
+form {
+  background-color: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+  margin-bottom: 30px;
+  max-width: 600px;
+  margin: 20px auto;
+  transition: transform 0.3s ease;
+}
+
+form:hover {
+  transform: translateY(-5px);
+}
+
+form label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 16px;
+  color: #333;
+}
+
+form input,
+form select,
+form button {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+form input:focus,
+form select:focus {
+  border-color: #4caf50;
+}
+
+form button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-weight: 600;
+}
+
+form button:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+}
+
+/* Table Styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 30px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+table th,
+table td {
+  border: none;
+  padding: 15px;
+  text-align: left;
+  font-size: 16px;
+  font-weight: 500;
+  color: #555;
+}
+
+table th {
+  background-color: #4caf50;
+  color: white;
+  font-weight: 600;
+}
+
+table tr {
+  border-bottom: 1px solid #eee;
+  transition: background-color 0.3s ease;
+}
+
+table tr:hover {
+  background-color: #f1f5ff;
+}
+
+table tr:nth-child(even) {
+  background-color: #f9fafc;
+}
+
+/* Button Styles */
+button,
+.btn {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover,
+.btn:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+}
+
+/* Earnings Filter Section */
+.earnings-filter {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 30px;
+  background-color: white;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.earnings-filter select {
+  max-width: 250px;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+}
+
+/* Footer */
+footer {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 0;
+  text-align: center;
+  font-size: 14px;
+  box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Page-Specific Styles */
+
+/* Product Page Cards */
+.product-card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 30px;
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+}
+
+.product-card img {
+  max-width: 100%;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.product-card h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #4caf50;
+}
+
+.product-card p {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.product-card .price {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Inventory Page */
+.inventory-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.inventory-list li {
+  background-color: white;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.05);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.inventory-list li:hover {
+  background-color: #f1f5ff;
+  transform: translateY(-5px);
+}
+
+.inventory-list li span {
+  font-weight: bold;
+  color: #4caf50;
+}
