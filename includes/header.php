@@ -21,8 +21,9 @@ if (!isset($_SESSION['username'])) {
         <h1>Shop Management Dashboard</h1>
         <nav>
             <a href="dashboard.php">Dashboard</a>
-            <a href="products.php">Products</a>
+            <a href="transactions.php">Transactions</a>
             <a href="inventory.php">Inventory</a>
+            <a href="products.php">Add Product</a>
             <?php if ($_SESSION['role'] == 'manager'): ?>
                 <a href="earnings.php">Earnings</a>
             <?php endif; ?>
