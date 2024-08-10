@@ -8,6 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $product_id = $_POST['product_id'];
     $quantity = $_POST['quantity'];
     $transaction_type = $_POST['transaction_type'];
+    $price = $_POST['price'];
 
     $stmt = $pdo->prepare("SELECT * FROM products WHERE id = ?");
     $stmt->execute([$product_id]);
@@ -23,7 +24,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $stmt->execute([$new_quantity, $product_id]);
 
             $stmt = $pdo->prepare("INSERT INTO transactions (product_id, quantity, transaction_type, price) VALUES (?, ?, ?, ?)");
-            $stmt->execute([$product_id, $quantity, $transaction_type, $product['price']]);
+            $stmt->execute([$product_id, $quantity, $transaction_type, $price]);
+
+            if ($transaction_type === 'purchase') {
+                $total_cost = ($product['price'] * $product['quantity']) + ($price * $quantity);
+                $new_avg_price = $total_cost / $new_quantity;
+                $stmt = $pdo->prepare("UPDATE products SET price = ? WHERE id = ?");
+                $stmt->execute([$new_avg_price, $product_id]);
+            }
 
             echo "<p>Transaction completed successfully!</p>";
         }
@@ -40,13 +48,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <select name="product_id" id="product_id" required>
             <?php foreach ($products as $product): ?>
                 <option value="<?php echo $product['id']; ?>">
-                    <?php echo htmlspecialchars($product['name']) . " - $" . number_format($product['price'], 2); ?>
+                    <?php echo htmlspecialchars($product['name']); ?>
                 </option>
             <?php endforeach; ?>
         </select>
 
         <label for="quantity">Quantity:</label>
         <input type="number" name="quantity" id="quantity" required>
+
+        <label for="price">Price:</label>
+        <input type="number" name="price" id="price" step="0.01" required>
 
         <label for="transaction_type">Transaction Type:</label>
         <select name="transaction_type" id="transaction_type" required>

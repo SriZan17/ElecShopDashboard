@@ -2,42 +2,46 @@
 include('includes/header.php');
 include('includes/db_connect.php');
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $product_id = $_POST['product_id'];
-    $quantity = $_POST['quantity'];
-
-    $stmt = $pdo->prepare("UPDATE products SET quantity = ? WHERE id = ?");
-    $stmt->execute([$quantity, $product_id]);
-}
-
 $products = $pdo->query("SELECT * FROM products")->fetchAll();
+
+$total_inventory_value = 0;
 ?>
 
 <main>
     <h2>Inventory Management</h2>
     <table>
-        <tr>
-            <th>Product Name</th>
-            <th>Current Quantity</th>
-            <th>Update Quantity</th>
-        </tr>
-        <?php foreach ($products as $product): ?>
+        <thead>
             <tr>
-            <tr>
-                <td><?php echo htmlspecialchars($product['name']); ?></td>
-                <td><?php echo htmlspecialchars($product['quantity']); ?></td>
-                <td>
-                    <form action="inventory.php" method="post" style="display:inline;">
-                        <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
-                        <input type="number" name="quantity" value="<?php echo $product['quantity']; ?>" required>
-                        <button type="submit">Update</button>
-                    </form>
-                </td>
+                <th>Product Image</th>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Price (Avg. Cost)</th>
+                <th>Total Value</th>
             </tr>
-        <?php endforeach; ?>
+        </thead>
+        <tbody>
+            <?php foreach ($products as $product): ?>
+                <?php
+                $product_value = $product['quantity'] * $product['price'];
+                $total_inventory_value += $product_value;
+                ?>
+                <tr>
+                    <td>
+                        <?php if (!empty($product['image'])): ?>
+                            <img src="<?php echo htmlspecialchars($product['image']); ?>" alt="Product Image" style="width: 100px; height: auto;">
+                        <?php else: ?>
+                            <img src="uploads/default.png" alt="Default Image" style="width: 100px; height: auto;">
+                        <?php endif; ?>
+                    </td>
+                    <td><?php echo htmlspecialchars($product['name']); ?></td>
+                    <td><?php echo $product['quantity']; ?></td>
+                    <td>Rs <?php echo number_format($product['price'], 2); ?></td>
+                    <td>Rs <?php echo number_format($product_value, 2); ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
     </table>
+    <h3>Total Inventory Value: Rs <?php echo number_format($total_inventory_value, 2); ?></h3>
 </main>
-</body>
 
-</html>
 <?php include('includes/footer.php'); ?>
