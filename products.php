@@ -10,7 +10,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!empty($image)) {
         $target = "uploads/" . basename($image);
         if (!move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
-            echo "<p>Failed to upload image. Using default image.</p>";
             $target = "uploads/default.png";
         }
     } else {

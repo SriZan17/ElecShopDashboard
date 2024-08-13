@@ -2,10 +2,8 @@
 include('includes/header.php');
 include('includes/db_connect.php');
 
-// Fetch all products
 $products = $pdo->query("SELECT * FROM products")->fetchAll();
 
-// Handle new transactions
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $product_id = $_POST['product_id'];
     $quantity = $_POST['quantity'];
@@ -46,20 +44,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 
-// Fetch all transactions
 $transactions = $pdo->query("SELECT transactions.*, products.name FROM transactions JOIN products ON transactions.product_id = products.id ORDER BY transactions.transaction_date DESC")->fetchAll();
 ?>
 
 <main>
     <h2>Product Transactions</h2>
 
-    <!-- Form for new transactions -->
     <form action="transactions.php" method="post">
         <label for="product_id">Select Product:</label>
         <select name="product_id" id="product_id" required>
             <?php foreach ($products as $product): ?>
                 <option value="<?php echo $product['id']; ?>">
-                    <?php echo htmlspecialchars($product['name']) . " - Current Price: RS" . number_format($product['price'], 2); ?>
+                    <?php echo htmlspecialchars($product['name']); ?>
                 </option>
             <?php endforeach; ?>
         </select>
@@ -80,7 +76,6 @@ $transactions = $pdo->query("SELECT transactions.*, products.name FROM transacti
     </form>
 
     <h2>Transaction History</h2>
-    <!-- Table to display old transactions -->
     <table>
         <thead>
             <tr>
@@ -99,8 +94,8 @@ $transactions = $pdo->query("SELECT transactions.*, products.name FROM transacti
                     <td><?php echo htmlspecialchars($transaction['name']); ?></td>
                     <td><?php echo ucfirst($transaction['transaction_type']); ?></td>
                     <td><?php echo $transaction['quantity']; ?></td>
-                    <td>$<?php echo number_format($transaction['price'], 2); ?></td>
-                    <td>$<?php echo number_format($transaction['quantity'] * $transaction['price'], 2); ?></td>
+                    <td>Rs <?php echo number_format($transaction['price'], 2); ?></td>
+                    <td>Rs <?php echo number_format($transaction['quantity'] * $transaction['price'], 2); ?></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>

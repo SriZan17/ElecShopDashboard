@@ -28,9 +28,9 @@ $total_inventory_value = 0;
                 <tr>
                     <td>
                         <?php if (!empty($product['image'])): ?>
-                            <img src="<?php echo htmlspecialchars($product['image']); ?>" alt="Product Image" style="width: 100px; height: auto;">
+                            <img src="<?php echo htmlspecialchars($product['image']); ?>" alt="Product Image" style="width: 100px; height: 100px; object-fit: cover;">
                         <?php else: ?>
-                            <img src="uploads/default.png" alt="Default Image" style="width: 100px; height: auto;">
+                            <img src="uploads/default.png" alt="Default Image" style="width: 100px; height: 100px; object-fit: cover;">
                         <?php endif; ?>
                     </td>
                     <td><?php echo htmlspecialchars($product['name']); ?></td>
